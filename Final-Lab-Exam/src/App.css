@@ -7,7 +7,8 @@
 .sidebar {
   width: 250px;
   min-height: 100vh;
-  background-color: #16181d; /* Dark charcoal, not completely pure black */
+  background-color: #16181d;
+  /* Dark charcoal, not completely pure black */
   color: #f3f4f6;
   padding: 24px 16px;
   display: flex;
