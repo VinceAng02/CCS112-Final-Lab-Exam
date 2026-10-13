@@ -1,11 +1,74 @@
 .app-container {
   display: flex;
+  min-height: 100vh;
 }
 
+/* Sidebar Styles */
 .sidebar {
-  width: 200px;
+  width: 250px;
+  min-height: 100vh;
+  background-color: #16181d; /* Dark charcoal, not completely pure black */
+  color: #f3f4f6;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #282a30;
+  box-sizing: border-box;
 }
 
+.sidebar-header {
+  padding-bottom: 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #282a30;
+}
+
+.sidebar-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Main Content Area */
 .main-content {
   flex: 1;
+  padding: 32px;
+  background-color: #f9fafb;
+}
+
+.dashboard h1 {
+  margin-bottom: 12px;
 }
