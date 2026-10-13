@@ -1,0 +1,11 @@
+.app-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+}
+
+.main-content {
+  flex: 1;
+}
