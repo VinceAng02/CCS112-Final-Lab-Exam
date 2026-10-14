@@ -3,10 +3,16 @@ import Sidebar from './component/Sidebar'
 import Dashboard from './component/Dashboard'
 import Reservation from './component/Reservaton'
 import HotelRoomInventory from './component/HotelRoomInventory'
-import LandingPage from './component/LandingPage'
+import Authentication from './component/Authentication'
 import './App.css'
 
 function DashboardLayout() {
+  const isAuthenticated = localStorage.getItem('isAdminAuthenticated') === 'true';
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="app-container">
       <Sidebar />
@@ -14,14 +20,14 @@ function DashboardLayout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Authentication />} />
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/HotelRoomInventory" element={<HotelRoomInventory />} />
