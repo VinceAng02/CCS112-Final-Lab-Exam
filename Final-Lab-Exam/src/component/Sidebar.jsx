@@ -18,18 +18,18 @@ export default function Sidebar() {
                     </li>
                     <li>
                         <NavLink
-                            to="/sample-1"
+                            to="/HotelRoomInventory"
                             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
                         >
-                            Sample 1
+                            Hotel Room's
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to="/sample-2"
+                            to="/Reservation"
                             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
                         >
-                            Sample 2
+                            Reservation
                         </NavLink>
                     </li>
                 </ul>
