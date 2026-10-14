@@ -17,8 +17,8 @@ export default function Authentication() {
         setTimeout(() => {
             // Administrator credentials validation
             const validUsername = username.trim().toLowerCase();
-            if ((validUsername === 'admin' && (password === 'admin123' || password === 'admin')) ||
-                (validUsername === 'administrator' && (password === 'admin123' || password === 'admin'))) {
+            if ((validUsername === 'admin' && (password === 'pms_admin' || password === 'hotelpms2026')) ||
+                (validUsername === 'administrator' && (password === 'pms_admin' || password === 'hotelpms2026'))) {
                 localStorage.setItem('isAdminAuthenticated', 'true');
                 localStorage.setItem('adminUser', validUsername);
                 navigate('/dashboard');
@@ -128,16 +128,6 @@ export default function Authentication() {
                             <span>Access Dashboard</span>
                         )}
                     </button>
-
-                    <div className="auth-hint-box">
-                        <div className="hint-header">
-                            <span>Demo Credentials:</span>
-                            <button type="button" onClick={handleQuickFill} className="quick-fill-btn">
-                                Auto-Fill
-                            </button>
-                        </div>
-                        <code>Username: <strong>admin</strong> | Password: <strong>admin123</strong></code>
-                    </div>
                 </form>
             </div>
         </div>
