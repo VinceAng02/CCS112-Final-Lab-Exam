@@ -1,11 +1,5 @@
-import { useState } from 'react';
-
-const initialRooms = [
-    { number: '101', type: 'Standard', floor: '1', capacity: '2', rate: '120', status: 'Available', description: 'A comfortable standard room with a courtyard view.' },
-    { number: '204', type: 'Deluxe', floor: '2', capacity: '2', rate: '185', status: 'Occupied', description: 'Spacious room with a king bed and city view.' },
-    { number: '305', type: 'Suite', floor: '3', capacity: '4', rate: '320', status: 'Available', description: 'Separate living area, king bed, and a private balcony.' },
-    { number: '108', type: 'Standard', floor: '1', capacity: '2', rate: '120', status: 'Maintenance', description: 'Room temporarily unavailable for scheduled maintenance.' },
-];
+import { useEffect, useState } from 'react';
+import { apiRequest } from '../api';
 
 const emptyRoom = {
     number: '',
@@ -18,11 +12,40 @@ const emptyRoom = {
 };
 
 export default function Dashboard() {
-    const [rooms, setRooms] = useState(initialRooms);
-    const [selectedRoom, setSelectedRoom] = useState(initialRooms[0]);
+    const [rooms, setRooms] = useState([]);
+    const [selectedRoom, setSelectedRoom] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadError, setLoadError] = useState('');
     const [isAddingRoom, setIsAddingRoom] = useState(false);
     const [newRoom, setNewRoom] = useState(emptyRoom);
     const [formError, setFormError] = useState('');
+    const [isSaving, setIsSaving] = useState(false);
+
+    useEffect(() => {
+        let isCurrent = true;
+
+        apiRequest('/rooms')
+            .then((loadedRooms) => {
+                if (isCurrent) {
+                    setRooms(loadedRooms);
+                    setSelectedRoom(loadedRooms[0] || null);
+                }
+            })
+            .catch((error) => {
+                if (isCurrent) {
+                    setLoadError(error.message);
+                }
+            })
+            .finally(() => {
+                if (isCurrent) {
+                    setIsLoading(false);
+                }
+            });
+
+        return () => {
+            isCurrent = false;
+        };
+    }, []);
 
     const updateNewRoom = (event) => {
         const { name, value } = event.target;
@@ -30,21 +53,34 @@ export default function Dashboard() {
         setFormError('');
     };
 
-    const addRoom = (event) => {
+    const addRoom = async (event) => {
         event.preventDefault();
         const roomNumber = newRoom.number.trim();
 
-        if (rooms.some((room) => room.number.toLowerCase() === roomNumber.toLowerCase())) {
-            setFormError('That room number is already in the inventory.');
-            return;
-        }
-
-        const room = { ...newRoom, number: roomNumber };
-        setRooms((currentRooms) => [room, ...currentRooms]);
-        setSelectedRoom(room);
-        setNewRoom(emptyRoom);
         setFormError('');
-        setIsAddingRoom(false);
+        setIsSaving(true);
+
+        try {
+            const room = await apiRequest('/rooms', {
+                method: 'POST',
+                body: JSON.stringify({
+                    ...newRoom,
+                    number: roomNumber,
+                    floor: Number(newRoom.floor),
+                    capacity: Number(newRoom.capacity),
+                    rate: Number(newRoom.rate),
+                }),
+            });
+
+            setRooms((currentRooms) => [room, ...currentRooms]);
+            setSelectedRoom(room);
+            setNewRoom(emptyRoom);
+            setIsAddingRoom(false);
+        } catch (error) {
+            setFormError(error.message);
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     const availableRooms = rooms.filter((room) => room.status === 'Available').length;
@@ -84,6 +120,8 @@ export default function Dashboard() {
                     <strong>{occupiedRooms}</strong>
                 </div>
             </div>
+
+            {loadError && <p className="room-form-error" role="alert">Could not load rooms: {loadError}</p>}
 
             {isAddingRoom && (
                 <form className="room-form" id="add-room-form" onSubmit={addRoom}>
@@ -135,7 +173,9 @@ export default function Dashboard() {
                     {formError && <p className="room-form-error" role="alert">{formError}</p>}
                     <div className="room-form-actions">
                         <button className="room-secondary-button" type="button" onClick={() => setIsAddingRoom(false)}>Cancel</button>
-                        <button className="room-primary-button" type="submit">Save room</button>
+                        <button className="room-primary-button" type="submit" disabled={isSaving}>
+                            {isSaving ? 'Saving...' : 'Save room'}
+                        </button>
                     </div>
                 </form>
             )}
@@ -160,8 +200,12 @@ export default function Dashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {rooms.map((room) => (
-                                    <tr className={selectedRoom?.number === room.number ? 'selected-room-row' : ''} key={room.number}>
+                                {isLoading ? (
+                                    <tr><td colSpan="5">Loading rooms...</td></tr>
+                                ) : rooms.length === 0 ? (
+                                    <tr><td colSpan="5">No rooms have been added yet.</td></tr>
+                                ) : rooms.map((room) => (
+                                    <tr className={selectedRoom?.id === room.id ? 'selected-room-row' : ''} key={room.id}>
                                         <td><strong>{room.number}</strong><span className="room-floor-label">Floor {room.floor}</span></td>
                                         <td>{room.type}</td>
                                         <td>${Number(room.rate).toFixed(2)}</td>

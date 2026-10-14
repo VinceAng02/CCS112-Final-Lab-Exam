@@ -153,18 +153,18 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: radial-gradient(circle at 50% 20%, #efeff1 0%, #d9e5f7 100%);
-  color: #f3f4f6;
+  background: #ffffff;
+  color: #1f2937;
 }
 
 .landing-card.admin-auth-card {
   width: 100%;
   max-width: 440px;
-  background: #b9c0d3;
-  border: 1px solid #dfe4f3;
-  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   padding: 36px 32px;
-  box-shadow: 0 20px 40px rgba(242, 241, 241, 0.45);
+  box-shadow: 0 12px 36px rgba(17, 24, 39, 0.07);
 }
 
 .auth-header {
@@ -178,9 +178,9 @@
   gap: 6px;
   padding: 4px 12px;
   border-radius: 20px;
-  background-color: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #374151;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -190,13 +190,13 @@
 .landing-title {
   font-size: 1.55rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #111827;
   margin-bottom: 8px;
 }
 
 .landing-subtitle {
   font-size: 0.88rem;
-  color: #9ca3af;
+  color: #6b7280;
   line-height: 1.45;
 }
 
@@ -209,7 +209,7 @@
   background-color: rgba(239, 68, 68, 0.12);
   border: 1px solid rgba(239, 68, 68, 0.35);
   border-radius: 8px;
-  color: #fca5a5;
+  color: #b91c1c;
   font-size: 0.84rem;
 }
 
@@ -228,7 +228,7 @@
 .form-group label {
   font-size: 0.84rem;
   font-weight: 600;
-  color: #d1d5db;
+  color: #374151;
 }
 
 .input-wrapper {
@@ -247,18 +247,18 @@
 .input-wrapper input {
   width: 100%;
   padding: 11px 40px 11px 38px;
-  background-color: #0d0f12;
-  border: 1px solid #282a30;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
-  color: #ffffff;
+  color: #111827;
   font-size: 0.92rem;
   outline: none;
   transition: all 0.2s ease;
 }
 
 .input-wrapper input:focus {
-  border-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  border-color: #6b7280;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
 }
 
 .toggle-password-btn {
@@ -274,13 +274,13 @@
 }
 
 .toggle-password-btn:hover {
-  color: #ffffff;
+  color: #374151;
 }
 
 .landing-btn.admin-submit-btn {
   margin-top: 8px;
   padding: 12px;
-  background-color: #000000;
+  background-color: #111827;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -291,7 +291,7 @@
 }
 
 .landing-btn.admin-submit-btn:hover:not(:disabled) {
-  background-color: #d5def7;
+  background-color: #374151;
   transform: translateY(-1px);
 }
 
@@ -303,11 +303,11 @@
 .auth-hint-box {
   margin-top: 14px;
   padding: 12px;
-  background-color: #121418;
-  border: 1px dashed #2d3039;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   font-size: 0.78rem;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .hint-header {
@@ -316,7 +316,7 @@
   align-items: center;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #cbd5e1;
+  color: #374151;
 }
 
 .quick-fill-btn {
@@ -336,7 +336,7 @@
 }
 
 .auth-hint-box code {
-  color: #e2e8f0;
+  color: #111827;
 }
 
 /* Room inventory dashboard */

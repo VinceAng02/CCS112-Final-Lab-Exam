@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\ReservationFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['room_id', 'guest_name', 'guest_email', 'check_in', 'check_out', 'guests', 'status'])]
 class Reservation extends Model
 {
-    /** @use HasFactory<\Database\Factories\ReservationFactory> */
+    /** @use HasFactory<ReservationFactory> */
     use HasFactory;
 
     protected function casts(): array

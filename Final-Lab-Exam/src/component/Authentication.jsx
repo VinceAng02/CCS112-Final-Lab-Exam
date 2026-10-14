@@ -17,8 +17,7 @@ export default function Authentication() {
         setTimeout(() => {
             // Administrator credentials validation
             const validUsername = username.trim().toLowerCase();
-            if ((validUsername === 'admin' && (password === 'pms_admin' || password === 'hotelpms2026')) ||
-                (validUsername === 'administrator' && (password === 'pms_admin' || password === 'hotelpms2026'))) {
+            if (validUsername === 'pms_admin' && password === 'hotelpms2026') {
                 localStorage.setItem('isAdminAuthenticated', 'true');
                 localStorage.setItem('adminUser', validUsername);
                 navigate('/dashboard');
@@ -30,8 +29,8 @@ export default function Authentication() {
     };
 
     const handleQuickFill = () => {
-        setUsername('admin');
-        setPassword('admin123');
+        setUsername('pms_admin');
+        setPassword('hotelpms2026');
         setError('');
     };
 
@@ -62,7 +61,7 @@ export default function Authentication() {
 
                 <form onSubmit={handleSubmit} className="auth-form">
                     <div className="form-group">
-                        <label htmlFor="admin-username">Admin Username</label>
+                        <label htmlFor="admin-username">Gmail</label>
                         <div className="input-wrapper">
                             <svg className="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -71,7 +70,7 @@ export default function Authentication() {
                             <input
                                 id="admin-username"
                                 type="text"
-                                placeholder="Enter admin username"
+                                placeholder="Enter Gmail"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -128,6 +127,7 @@ export default function Authentication() {
                             <span>Access Dashboard</span>
                         )}
                     </button>
+
                 </form>
             </div>
         </div>
