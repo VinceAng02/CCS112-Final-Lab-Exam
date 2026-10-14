@@ -44,9 +44,8 @@ export default function Authentication() {
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
-                        <span>RESTRICTED ACCESS</span>
                     </div>
-                    <h1 className="landing-title">Administrator Portal</h1>
+                    <h1 className="landing-title">Property & Hotel management System</h1>
                     <p className="landing-subtitle">Authorized personnel only. Please sign in to access management controls.</p>
                 </div>
 

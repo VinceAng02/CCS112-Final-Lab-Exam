@@ -257,7 +257,7 @@
 }
 
 .input-wrapper input:focus {
-  border-color: #3b82f6;
+  border-color: #ffffff;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
@@ -280,7 +280,7 @@
 .landing-btn.admin-submit-btn {
   margin-top: 8px;
   padding: 12px;
-  background-color: #2563eb;
+  background-color: #000000;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -291,7 +291,7 @@
 }
 
 .landing-btn.admin-submit-btn:hover:not(:disabled) {
-  background-color: #1d4ed8;
+  background-color: #d5def7;
   transform: translateY(-1px);
 }
 
