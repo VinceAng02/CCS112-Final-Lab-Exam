@@ -1,4 +1,4 @@
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
 
 RUN apk add --no-cache postgresql-dev icu-dev oniguruma-dev libzip-dev libxml2-dev \
     && docker-php-ext-install pdo_pgsql mbstring bcmath intl zip dom
