@@ -1,0 +1,54 @@
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    environment:
+      API_UPSTREAM: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_started
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./Backend
+    environment:
+      APP_NAME: HotelPMS
+      APP_ENV: ${APP_ENV:-local}
+      APP_KEY: ${APP_KEY:?Set APP_KEY in .env}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_URL: ${APP_URL:-http://localhost:8000}
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE:-hotel_pms}
+      DB_USERNAME: ${DB_USERNAME:-hotel_pms}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      CACHE_STORE: file
+      SESSION_DRIVER: file
+      QUEUE_CONNECTION: sync
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-hotel_pms}
+      POSTGRES_USER: ${DB_USERNAME:-hotel_pms}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-hotel_pms} -d ${DB_DATABASE:-hotel_pms}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

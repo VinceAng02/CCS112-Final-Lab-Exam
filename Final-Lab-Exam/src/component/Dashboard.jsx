@@ -154,7 +154,7 @@ export default function Dashboard() {
                             <input name="capacity" type="number" min="1" value={newRoom.capacity} onChange={updateNewRoom} required />
                         </label>
                         <label>
-                            Rate per night ($)
+                            Rate per night (₱)
                             <input name="rate" type="number" min="0" step="0.01" value={newRoom.rate} onChange={updateNewRoom} required />
                         </label>
                         <label>
